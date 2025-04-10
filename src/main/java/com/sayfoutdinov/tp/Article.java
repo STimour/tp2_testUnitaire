@@ -1,20 +1,23 @@
 package com.sayfoutdinov.tp;
 
-
-/**
- * Article!
- *
- */
 public class Article {
-    private int Id;
+    private int id;
+    private String title;
+    private String content;
 
-    private float Price;
-
-    private String Name;
-
-    public Article(String Name, double Price, int Id) {
-        this.Id = Id;
-        this.Name = Name;
-        this.Price = (float) Price;
+    public Article(int id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
     }
+
+    public String toCsv() {
+        return id + "," + title + "," + content;
+    }
+
+    public static Article fromCsv(String csvLine) {
+        String[] fields = csvLine.split(",");
+        return new Article(Integer.parseInt(fields[0]), fields[1], fields[2]);
+    }
+
 }

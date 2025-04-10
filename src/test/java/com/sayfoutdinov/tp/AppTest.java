@@ -1,47 +1,36 @@
 package com.sayfoutdinov.tp;
 
-// Ensure the Article class is correctly imported or update the path if necessary
-import com.sayfoutdinov.tp.Article; // Update to the correct package path of the Article class
-import com.sayfoutdinov.tp.ListArticle;
-import java.util.List;
-import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.io.File;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
-    /**
-     * Create the test case
-     *
-     * @param testAddArticle name of the test case
-     */
-    @org.junit.jupiter.api.Test
-    public void testAddArticle( String testName )
-    {       
-        //Arrange
-       List<Article> articles;
 
-        Article newArticle = new Article("Stylo", 2.2, articles.Count(articles) + 1);        
-    
-        //Act 
-        articles.add(newArticle);
+    private ListArticle listArticle;
 
-        //Assert
-        assertEquals(1, articles.getArticleCount());
+    @BeforeEach
+    public void setUp() {
+        // Initialize ListArticle and ensure the CSV file is empty before each test
+        listArticle = new ListArticle();
+        File file = new File("articles.csv");
+        if (file.exists()) {
+            file.delete(); // Delete the file to start fresh
+        }
     }
 
-    // /**
-    // * @return the suite of tests being tested
-    // */
-    // @Test
-    // public static Test suite()
-    // {
-    // return new TestSuite( AppTest.class );
-    // }
+    @Test
+    public void testAddArticle() {
+        // Arrange
+        Article newArticle = new Article(1, "Stylo", "Un stylo bleu");
 
-    // /**
-    // * Rigourous Test :-)
-    // */
-    // @Test
-    // public void testApp()
-    // {
-    // assertTrue( true );
-    // }
+        // Act
+        String result = listArticle.addArticle(newArticle);
+
+        // Assert
+        assertEquals("Article added successfully.", result);
+        assertEquals(1, listArticle.Count());
+    }
 }
