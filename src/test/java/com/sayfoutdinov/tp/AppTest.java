@@ -33,4 +33,16 @@ public class AppTest {
         assertEquals("Article added successfully.", result);
         assertEquals(1, listArticle.Count());
     }
+
+    @Test
+    public void testRemoveArticle() {
+        // Arrange
+        int id = 1;
+        // Act
+        String result = listArticle.removeArticleById(id);
+
+        // Assert
+        assertEquals("Article removed successfully.", result);
+        assertEquals(listArticle.Count() -1, listArticle.Count());
+    }
 }
